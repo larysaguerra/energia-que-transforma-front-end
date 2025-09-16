@@ -1,7 +1,6 @@
 import { Leaf, Zap } from "lucide-react"
-import Link from 'next/link'
 
-export default function Encabezado() {
+export default function EncabezadoBase() {
   return (
     <header className="bg-primary text-primary-foreground shadow-lg">
       <div className="container mx-auto px-4 py-6">
@@ -13,18 +12,6 @@ export default function Encabezado() {
             <div>
               <h1 className="text-2xl font-bold text-balance">Energía que transforma</h1>
               <p className="text-primary-foreground/80 text-sm">De lo convencional a lo sostenible</p>
-            </div>
-          </div>
-          <div>
-            <div className="text-right">
-              <Link href="/sign-in" className="text-base text-primary-foreground/80 hover:underline">
-                <p className="font-bold">Iniciar sesión</p>
-              </Link>
-            </div>
-            <div className="text-right">
-              <Link href="/sign-up" className="text-sm text-primary-foreground/80 hover:underline">
-                <p className="text-sm text-primary-foreground/80">No tienes cuenta? Regístrate</p>
-              </Link>
             </div>
           </div>
         </div>
