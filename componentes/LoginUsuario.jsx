@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState } from "react"
 import { Button } from "../components/ui/button"
@@ -66,9 +66,6 @@ export default function FormularioLogin({ onLogin, cargando }) {
               />
             </div>
           </div>
-
-          private TipoModel tipo;
-
 
           <Button type="submit" className="w-full" disabled={cargando}>
             {cargando ? (

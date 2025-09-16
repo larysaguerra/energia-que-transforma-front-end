@@ -1,34 +1,93 @@
-// Servicio para manejar las llamadas a la API de energía
-// Actualmente usa datos mock, reemplazar con endpoints reales cuando estén disponibles
+// Servicio para manejar las llamadas a la API
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api"
+const API_BASE_URL = "http://localhost:8080";
 
-// Función para calcular ahorro energético
-export async function calcularAhorroEnergetico(datosFormulario) {
-  try {
-    // TODO: Reemplazar con llamada real a Spring Boot API
-    // const response = await fetch(`${API_BASE_URL}/calcular-ahorro`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(datosFormulario)
-    // })
-    //
-    // if (!response.ok) {
-    //   throw new Error('Error en la respuesta del servidor')
-    // }
-    //
-    // return await response.json()
+// --- User Endpoints ---
 
-    // Datos mock mientras el backend no esté disponible
-    return await calcularAhorroMock(datosFormulario)
-  } catch (error) {
-    console.error("Error al calcular ahorro energético:", error)
-    throw error
+export async function registrarUsuario(datosUsuario) {
+  const response = await fetch(`${API_BASE_URL}/user/saveusers`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datosUsuario),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al registrar usuario: ${errorBody}`);
   }
+  return await response.json();
 }
 
+export async function iniciarSesion(credenciales) {
+  const response = await fetch(`${API_BASE_URL}/user/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(credenciales),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al iniciar sesión: ${errorBody}`);
+  }
+  return await response.json(); // Should return a token
+}
+
+export async function obtenerUsuarioPorId(id, token) {
+  const response = await fetch(`${API_BASE_URL}/user/${id}`, {
+    headers: { 'token': token },
+  });
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al obtener usuario: ${errorBody}`);
+  }
+  return await response.json();
+}
+
+export async function verificarAutenticacion(token) {
+  const response = await fetch(`${API_BASE_URL}/user/checkAuth`, {
+    method: 'POST',
+    headers: { 'token': token },
+  });
+  return response.ok; // Returns true if token is valid
+}
+
+// --- Product Endpoints ---
+
+export async function crearProducto(datosProducto, token) {
+  const response = await fetch(`${API_BASE_URL}/producto/postproducto`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'token': token, // Assuming token is needed for this endpoint
+    },
+    body: JSON.stringify(datosProducto),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al crear producto: ${errorBody}`);
+  }
+  return await response.json();
+}
+
+export async function obtenerProductos() {
+  const response = await fetch(`${API_BASE_URL}/producto/getproductos`);
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al obtener productos: ${errorBody}`);
+  }
+  return await response.json();
+}
+
+
+// --- Energy Calculation Endpoint ---
+
+// This function was previously mocked. The user did not provide an endpoint for it.
+// I will keep the mock function in case it is still used somewhere.
+
+export async function calcularAhorroEnergetico(datosFormulario) {
+  console.warn("Usando función mock para calcularAhorroEnergetico. Reemplazar con API real si está disponible.");
+  return await calcularAhorroMock(datosFormulario);
+}
+
+// Función mock para simular cálculos del backend
 // Función mock para simular cálculos del backend
 async function calcularAhorroMock(datos) {
   // Simular delay de red
