@@ -20,7 +20,7 @@ export default function FormularioLogin({ onLogin, cargando }) {
     }))
   }
 
-  const manejarRegistro = (e) => {
+  const manejarLogin = (e) => {
     e.preventDefault()
 
     // Validar que todos los campos estén completos
@@ -36,13 +36,14 @@ export default function FormularioLogin({ onLogin, cargando }) {
   }
 
   return (
+
     <Card className="w-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">Inicio de Sesión</CardTitle>
         <CardDescription>Ingresa tu correo electrónico y contraseña</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={manejarRegistro} className="space-y-4">
+        <form onSubmit={manejarLogin} className="space-y-4">
           <div className="grid md:grid-cols-1 gap-4">
             <div className="space-y-2">
               <Label htmlFor="correo">Correo</Label>
@@ -65,6 +66,9 @@ export default function FormularioLogin({ onLogin, cargando }) {
               />
             </div>
           </div>
+
+          private TipoModel tipo;
+
 
           <Button type="submit" className="w-full" disabled={cargando}>
             {cargando ? (
