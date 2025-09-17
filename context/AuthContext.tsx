@@ -7,13 +7,14 @@ interface User {
   id: number;
   nombre: string;
   email: string;
+  token: string;
 }
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (newToken: string, user: User) => void;
+  login: (user: User) => void;
   logout: () => void;
   loading: boolean;
 }
@@ -45,10 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = (newToken: string, newUser: User) => {
-    setToken(newToken);
+  const login = (newUser: User) => {
+    setToken(newUser.token);
     setUser(newUser);
-    localStorage.setItem('token', newToken);
+    localStorage.setItem('token', newUser.token);
     localStorage.setItem('user', JSON.stringify(newUser));
   };
 

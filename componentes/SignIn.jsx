@@ -30,8 +30,8 @@ export default function SignIn() {
         password: datosFormulario.contrasena,
       };
       const data = await iniciarSesion(datosParaApi);
-      if (data.token && data.user) {
-        login(data.token, data.user);
+      if (data.token) {
+        login(data);
         router.push("/");
       } else {
         setError("Respuesta de inicio de sesión inválida.");
