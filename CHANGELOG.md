@@ -2,6 +2,19 @@
 
 Este documento resume los cambios y nuevas características implementadas en el proyecto.
 
+## Versión 17/09/2025 - Funcionalidad de Creación de Productos y Mejoras en Registro
+
+### 🚀 Nuevas Características
+
+-   **Formulario de Creación de Productos:** Se ha implementado un nuevo formulario en la sección de administración (`/admin/productos`) que se alinea con la estructura de la tabla `productos` de la base de datos.
+    -   Incluye todos los campos requeridos, como capacidad, costos, eficiencia, etc.
+    -   Utiliza componentes de UI adecuados como selectores, interruptores y campos numéricos.
+-   **Carga Dinámica de Tipos de Energía:** El formulario de creación de productos ahora obtiene dinámicamente los "Tipos de Energía" (Panel Solar, Turbina Eólica) desde el endpoint `/tipo/gettipos` de la API, poblando el selector correspondiente.
+
+### ✨ Mejoras
+
+-   **Rol de Usuario por Defecto:** Al registrar un nuevo usuario, se le asigna automáticamente el rol de `"usuario"` por defecto, estandarizando los nuevos registros.
+
 ## Versión 16/09/2025 - Integración de Backend y Autenticación Completa
 
 ### 🔌 Integración con Backend

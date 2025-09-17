@@ -56,7 +56,6 @@ export async function crearProducto(datosProducto, token) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      // 'token': token, // Assuming token is needed for this endpoint
     },
     body: JSON.stringify(datosProducto),
   });
@@ -76,18 +75,23 @@ export async function obtenerProductos() {
   return await response.json();
 }
 
+export async function obtenerTiposEnergia() {
+  const response = await fetch(`${API_BASE_URL}/tipo/gettipos`);
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al obtener los tipos de energía: ${errorBody}`);
+  }
+  return await response.json();
+}
+
 
 // --- Energy Calculation Endpoint ---
 
-// This function was previously mocked. The user did not provide an endpoint for it.
-// I will keep the mock function in case it is still used somewhere.
 
 export async function calcularAhorroEnergetico(datosFormulario) {
   console.warn("Usando función mock para calcularAhorroEnergetico. Reemplazar con API real si está disponible.");
   return await calcularAhorroMock(datosFormulario);
 }
-
-// Función mock para simular cálculos del backend
 // Función mock para simular cálculos del backend
 async function calcularAhorroMock(datos) {
   // Simular delay de red

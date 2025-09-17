@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Encabezado from "../../../componentes/Encabezado";
 import PiePagina from "../../../componentes/PiePagina";
 import FormularioProducto from "../../../componentes/FormularioProducto";
-import { crearProducto } from "../../../servicios/apiEnergia";
+import { crearProducto, obtenerTiposEnergia } from "../../../servicios/apiEnergia";
 import { useAuth } from "../../../context/AuthContext.tsx";
 import { Alert, AlertDescription, AlertTitle } from "../../../components/ui/alert";
 import { useRouter } from "next/navigation";
@@ -13,8 +13,23 @@ export default function AdminProductosPage() {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [tiposEnergia, setTiposEnergia] = useState([]);
   const { token, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    async function cargarTipos() {
+      try {
+        const data = await obtenerTiposEnergia();
+        setTiposEnergia(data);
+      } catch (err) {
+        setError(`Error al cargar tipos de energía: ${err.message}`);
+      }
+    }
+    if (isAuthenticated) {
+      cargarTipos();
+    }
+  }, [isAuthenticated]);
 
   const handleGuardarProducto = async (datosProducto) => {
     setCargando(true);
@@ -62,13 +77,17 @@ export default function AdminProductosPage() {
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-          {success && (
+          {success && !error && (
             <Alert className="mb-4">
               <AlertTitle>¡Éxito!</AlertTitle>
               <AlertDescription>Producto guardado correctamente. Redirigiendo a la lista de productos...</AlertDescription>
             </Alert>
           )}
-          <FormularioProducto onGuardar={handleGuardarProducto} cargando={cargando} />
+          <FormularioProducto
+            onGuardar={handleGuardarProducto}
+            cargando={cargando}
+            tiposEnergia={tiposEnergia}
+          />
         </div>
       </main>
       <PiePagina />

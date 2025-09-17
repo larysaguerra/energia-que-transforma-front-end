@@ -13,7 +13,6 @@ export default function App() {
   const manejarCalcular = async (datosFormulario) => {
     setCargando(true);
     try {
-      // Simular llamada a API - reemplazar con endpoint real cuando esté disponible
       const { calcularAhorroEnergetico } = await import(
         "../servicios/apiEnergia"
       );

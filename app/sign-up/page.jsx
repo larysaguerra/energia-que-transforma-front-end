@@ -23,6 +23,7 @@ export default function SignupPage() {
         apellido: datosFormulario.apellido,
         email: datosFormulario.correo,
         password: datosFormulario.contrasena,
+        rol: datosFormulario.rol,
       };
       await registrarUsuario(datosParaApi);
       // Redirect to login page after successful registration

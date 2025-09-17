@@ -13,7 +13,8 @@ export default function FormularioRegistro({onRegistrar, cargando }) {
     apellido: "",
     correo: "",
     contrasena: "",
-    contrasena1: ""
+    contrasena1: "",
+    rol: "usuario"
   })
 
   const manejarCambio = (campo, valor) => {
