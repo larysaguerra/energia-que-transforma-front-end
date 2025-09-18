@@ -1,6 +1,6 @@
 // Servicio para manejar las llamadas a la API
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://energia-que-transforma-back-end.onrender.com";
 
 // --- User Endpoints ---
 
