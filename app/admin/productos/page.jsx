@@ -38,7 +38,7 @@ export default function AdminProductosPage() {
     try {
       await crearProducto(datosProducto, token);
       setSuccess(true);
-      // Optionally, redirect or clear the form
+      // Limpiar el formulario o redirigir
       setTimeout(() => router.push('/productos'), 2000);
     } catch (err) {
       setError(err.message);
@@ -52,7 +52,6 @@ export default function AdminProductosPage() {
   }
 
   if (!isAuthenticated) {
-    // Or redirect to login page
     return (
         <div className="min-h-screen bg-background">
             <Encabezado />

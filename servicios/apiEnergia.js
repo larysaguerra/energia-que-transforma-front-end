@@ -56,6 +56,7 @@ export async function crearProducto(datosProducto, token) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'token': token, // CORREGIDO: Se agregó el token de autenticación
     },
     body: JSON.stringify(datosProducto),
   });
